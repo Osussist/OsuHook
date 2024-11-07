@@ -20,7 +20,7 @@ Logger::Logger(const int logLevel, const bool fileLogging) {
         std::string exePath(buffer);
         Logger::logFile = std::ofstream(exePath + "\\log.txt", std::ios_base::app);
     }
-    Logger::info("Logger", "Logger initialized successfully");
+    Logger::info(__FUNCTION__, "Logger initialized successfully");
 }
 
 void Logger::info(const std::string& function, const std::string& message) {

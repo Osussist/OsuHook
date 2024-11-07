@@ -145,12 +145,14 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\sdk\screen\screen.cpp" />
     <ClCompile Include="src\sdk\sdk.cpp" />
+    <ClCompile Include="src\sdk\storage\storage.cpp" />
     <ClCompile Include="src\utils\logger.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\sdk\screen\screen.h" />
     <ClInclude Include="src\sdk\objects\vector.h" />
     <ClInclude Include="src\sdk\sdk.h" />
+    <ClInclude Include="src\sdk\storage\storage.h" />
     <ClInclude Include="src\sdk\window\window.h" />
     <ClInclude Include="src\utils\logger.h" />
   </ItemGroup>

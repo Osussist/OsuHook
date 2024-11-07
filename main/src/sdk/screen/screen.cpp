@@ -14,31 +14,31 @@ HWND FindWindowFromProcessId(DWORD processId) {
 	return windowHandle;
 }
 
-Metrics::Metrics(Logger sdkLogger, HANDLE processHandle) : logger(sdkLogger) {
-	Metrics::windowHandle = FindWindowFromProcessId(GetProcessId(processHandle));
-	logger.debug(__FUNCTION__, "Found window handle: " + std::to_string(reinterpret_cast<int>(Metrics::windowHandle)));
-	logger.info(__FUNCTION__, "Metrics successfully initialized");
+Screen::Screen(Logger sdkLogger, HANDLE processHandle) : logger(sdkLogger) {
+	Screen::windowHandle = FindWindowFromProcessId(GetProcessId(processHandle));
+	logger.debug(__FUNCTION__, "Found window handle: " + std::to_string(reinterpret_cast<int>(Screen::windowHandle)));
+	logger.info(__FUNCTION__, "Screen successfully initialized");
 }
 
 template <typename T>
-Vector2<T> Metrics::get_client_offset<T>() {
+Vector2<T> Screen::get_client_offset() {
 	RECT clientRect;
-	GetClientRect(Metrics::windowHandle, &clientRect);
+	GetClientRect(Screen::windowHandle, &clientRect);
 	return Vector2<T>(clientRect.right - clientRect.left, clientRect.bottom - clientRect.top);
 }
 
 template <typename T>
-Vector2<T> Metrics::get_host_size<T>() {
+Vector2<T> Screen::get_host_size() {
 	return Vector2<T>(GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN));
 }
 
-std::wstring Metrics::get_client_title() {
+std::wstring Screen::get_client_title() {
 	wchar_t title[256];
-	GetWindowText(Metrics::windowHandle, title, sizeof(title));
+	GetWindowText(Screen::windowHandle, title, sizeof(title));
 	return std::wstring(title);
 }
 
-std::wstring Metrics::get_current_window_title() {
+std::wstring Screen::get_current_window_title() {
 	wchar_t title[256];
 	GetWindowText(GetForegroundWindow(), title, sizeof(title));
 	return std::wstring(title);

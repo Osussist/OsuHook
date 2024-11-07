@@ -4,9 +4,9 @@
 #include <windows.h>
 #include <string>
 
-class Metrics {
+class Screen {
 public:
-	Metrics(Logger sdkLogger, HANDLE processHandle);
+	Screen(Logger sdkLogger, HANDLE processHandle);
 
 	template <typename T>
 	Vector2<T> get_client_offset();
