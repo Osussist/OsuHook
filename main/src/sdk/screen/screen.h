@@ -1,8 +1,6 @@
 #pragma once
 #include "../../utils/logger.h"
 #include "../objects/vector.h"
-#include <windows.h>
-#include <string>
 
 class Screen {
 public:

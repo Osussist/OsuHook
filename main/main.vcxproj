@@ -88,6 +88,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <AdditionalIncludeDirectories>C:\Users\maxar\Desktop\Takkeshi_Code\WesHook\main\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -149,6 +150,23 @@
     <ClCompile Include="src\utils\logger.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\osu!parser\Parser.hpp" />
+    <ClInclude Include="include\osu!parser\Parser\Beatmap.hpp" />
+    <ClInclude Include="include\osu!parser\Parser\Database.hpp" />
+    <ClInclude Include="include\osu!parser\Parser\Reader\Reader.hpp" />
+    <ClInclude Include="include\osu!parser\Parser\Replay.hpp" />
+    <ClInclude Include="include\osu!parser\Parser\Structures\Beatmap\HitObject.hpp" />
+    <ClInclude Include="include\osu!parser\Parser\Structures\Beatmap\Sections\DifficultySection.hpp" />
+    <ClInclude Include="include\osu!parser\Parser\Structures\Beatmap\Sections\EditorSection.hpp" />
+    <ClInclude Include="include\osu!parser\Parser\Structures\Beatmap\Sections\GeneralSection.hpp" />
+    <ClInclude Include="include\osu!parser\Parser\Structures\Beatmap\Sections\MetadataSection.hpp" />
+    <ClInclude Include="include\osu!parser\Parser\Structures\Beatmap\Sections\Section.hpp" />
+    <ClInclude Include="include\osu!parser\Parser\Structures\Beatmap\TimingPoint.hpp" />
+    <ClInclude Include="include\osu!parser\Parser\Structures\Database\BeatmapEntry.hpp" />
+    <ClInclude Include="include\osu!parser\Parser\Structures\Database\Enums.hpp" />
+    <ClInclude Include="include\osu!parser\Parser\Structures\Database\TimingPointEntry.hpp" />
+    <ClInclude Include="include\osu!parser\Parser\Structures\Replay\ReplayAction.hpp" />
+    <ClInclude Include="include\osu!parser\Parser\Utilities.hpp" />
     <ClInclude Include="src\sdk\screen\screen.h" />
     <ClInclude Include="src\sdk\objects\vector.h" />
     <ClInclude Include="src\sdk\sdk.h" />
