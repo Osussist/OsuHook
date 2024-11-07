@@ -16,7 +16,7 @@ Logger::Logger(const int logLevel, const bool fileLogging) {
 	Logger::logLevel = logLevel;
     if (fileLogging) {
         char buffer[FILENAME_MAX];
-        _getcwd(buffer, FILENAME_MAX);
+        auto temp = _getcwd(buffer, FILENAME_MAX);
         std::string exePath(buffer);
         Logger::logFile = std::ofstream(exePath + "\\log.txt", std::ios_base::app);
     }

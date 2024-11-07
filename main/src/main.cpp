@@ -1,4 +1,5 @@
 #include "utils/logger.h"
+#include "sdk/sdk.h"
 
 #ifdef _DEBUG
 	#define LOG_TYPE LOG_TYPE_DEBUG

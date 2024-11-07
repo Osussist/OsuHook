@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -143,11 +143,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\sdk\screen\screen.cpp" />
     <ClCompile Include="src\sdk\sdk.cpp" />
     <ClCompile Include="src\utils\logger.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\sdk\screen\screen.h" />
+    <ClInclude Include="src\sdk\objects\vector.h" />
     <ClInclude Include="src\sdk\sdk.h" />
+    <ClInclude Include="src\sdk\window\window.h" />
     <ClInclude Include="src\utils\logger.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
