@@ -8,5 +8,4 @@
 
 int main() {
     Logger logger(LOG_TYPE, true);
-    
 }
