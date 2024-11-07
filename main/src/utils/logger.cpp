@@ -1,5 +1,9 @@
 #include "logger.h"
 
+std::ofstream Logger::logFile;
+bool Logger::logToFile = false;
+int Logger::logLevel = 0;
+
 std::wstring stringToWideString(const std::string& str) {
     int size_needed = MultiByteToWideChar(CP_UTF8, 0, str.c_str(), (int)str.size(), NULL, 0);
     std::wstring wstrTo(size_needed, 0);
@@ -16,7 +20,7 @@ Logger::Logger(const int logLevel, const bool fileLogging) {
         std::string exePath(buffer);
         Logger::logFile = std::ofstream(exePath + "\\log.txt", std::ios_base::app);
     }
-    Logger::info(__FUNCTION__, "Logger initialized");
+    Logger::info("Logger", "Logger initialized successfully");
 }
 
 void Logger::info(const std::string& function, const std::string& message) {
