@@ -83,16 +83,10 @@
     <ClInclude Include="include\osu!parser\Parser\Structures\Database\TimingPointEntry.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\osu!parser\Parser\Structures\Replay\ReplayAction.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\osu!parser\Parser\Beatmap.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\osu!parser\Parser\Database.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\osu!parser\Parser\Replay.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\osu!parser\Parser\Utilities.hpp">

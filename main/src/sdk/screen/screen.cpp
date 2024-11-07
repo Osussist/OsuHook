@@ -1,5 +1,7 @@
 #include "screen.h"
 
+HWND Screen::windowHandle = nullptr;
+
 HWND FindWindowFromProcessId(DWORD processId) {
 	HWND windowHandle = NULL;
 	EnumWindows([](HWND windowHandle, LPARAM lParam) -> BOOL {

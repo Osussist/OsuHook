@@ -4,6 +4,7 @@
 
 class Screen {
 public:
+	Screen() : logger(0, false) { return; }
 	Screen(Logger sdkLogger, HANDLE processHandle);
 
 	template <typename T>
@@ -14,5 +15,5 @@ public:
 	std::wstring get_current_window_title();
 private:
 	Logger logger;
-	HWND windowHandle;
+	static HWND windowHandle;
 };

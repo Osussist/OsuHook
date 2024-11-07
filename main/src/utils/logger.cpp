@@ -24,7 +24,7 @@ Logger::Logger(const int logLevel, const bool fileLogging) {
 }
 
 void Logger::info(const std::string& function, const std::string& message) {
-    if (Logger::logLevel <= LOG_TYPE_INFO)
+    if (Logger::logLevel < LOG_TYPE_INFO)
 		return;
 
     std::cout << "[INFO] " << function << " | " << message << std::endl;
@@ -34,7 +34,7 @@ void Logger::info(const std::string& function, const std::string& message) {
 }
 
 void Logger::error(const std::string& function, const std::string& message) {
-    if (Logger::logLevel <= LOG_TYPE_ERROR)
+    if (Logger::logLevel < LOG_TYPE_ERROR)
 		return;
 
     std::cout << "[ERROR] " << function << " | " << message << std::endl;
@@ -44,7 +44,7 @@ void Logger::error(const std::string& function, const std::string& message) {
 }
 
 void Logger::warning(const std::string& function, const std::string& message) {
-    if (Logger::logLevel <= LOG_TYPE_WARNING)
+    if (Logger::logLevel < LOG_TYPE_WARNING)
         return;
 
     std::cout << "[WARNING] " << function << " | " << message << std::endl;
@@ -54,7 +54,7 @@ void Logger::warning(const std::string& function, const std::string& message) {
 }
 
 void Logger::debug(const std::string& function, const std::string& message) {
-	if (Logger::logLevel <= LOG_TYPE_DEBUG)
+	if (Logger::logLevel < LOG_TYPE_DEBUG)
 		return;
 
     std::cout << "[DEBUG] " << function << " | " << message << std::endl;

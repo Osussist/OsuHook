@@ -9,4 +9,5 @@
 
 int main() {
     Logger logger(LOG_TYPE, true);
+	SDK sdk(logger);
 }
