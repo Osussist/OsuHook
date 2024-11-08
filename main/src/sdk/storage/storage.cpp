@@ -3,6 +3,7 @@
 std::string Storage::baseDirectory = "";
 std::string Storage::songsDirectory = "";
 Parser::Database Storage::database(Storage::baseDirectory);
+std::list<std::pair<std::string, std::string>> Storage::cachedBeatmaps;
 
 std::string GetHandlePath(HANDLE processHandle) {
 	char buffer[MAX_PATH];
@@ -19,21 +20,20 @@ Storage::Storage(Logger sdkLogger, HANDLE processHandle) : logger(sdkLogger) {
 	logger.debug(__FUNCTION__, "Songs directory: " + Storage::songsDirectory);
 	Parser::Database database(Storage::baseDirectory + "\\osu!.db");
 	logger.debug(__FUNCTION__, "Database initialized");
-	std::list<std::vector<std::string, Parser::Beatmap>> cachedBeatmaps = std::list<std::vector<std::string, Parser::Beatmap>>();
 	logger.debug(__FUNCTION__, "Cached beatmaps initialized");
 	logger.info(__FUNCTION__, "Storage initialized successfully");
 }
 
 Parser::Beatmap Storage::get_beatmap(std::string beatmapHash) {
-
 	if (cachedBeatmaps.size() > 0) {
-		for (const std::vector<std::string, Parser::Beatmap>& cachedBeatmap : cachedBeatmaps) {
-			if (cachedBeatmap[0] == beatmapHash) {
+        for (const auto& cachedBeatmap : cachedBeatmaps) {
+			if (cachedBeatmap.first == beatmapHash) {
 				logger.debug(__FUNCTION__, "Beatmap with hash " + beatmapHash + " found in cache");
-				return cachedBeatmap[1];
+				return Parser::Beatmap(cachedBeatmap.second);
 			}
-		}
+        }
 	}
+
 	logger.debug(__FUNCTION__, "Beatmap with hash " + beatmapHash + " not found in cache");
 	for (const Parser::BeatmapEntry& checkedBeatmap : database.Beatmaps)
 	{
@@ -53,4 +53,12 @@ void Storage::update_database() {
     Storage::database.~Database();
 	Parser::Database database(Storage::baseDirectory + "\\osu!.db");
     logger.info(__FUNCTION__, "Database updated");
+}
+
+void Storage::on_beatmap_import(std::wstring beatmapPath) {
+    std::string convertedPath = Translate::WcharToChar(beatmapPath.c_str());
+	std::string beatmapHash = Translate::CharArrayToString(Crypto::get_md5_from_file(convertedPath));
+	logger.debug(__FUNCTION__, "Beatmap imported at path: " + convertedPath);
+	Storage::cachedBeatmaps.push_back(std::make_pair(beatmapHash, convertedPath));
+	logger.info(__FUNCTION__, "Beatmap cached successfully");
 }

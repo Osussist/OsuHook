@@ -1,6 +1,7 @@
 #pragma once
 #include "../../utils/logger.h"
 #include "../objects/vector.h"
+#include "../../utils/translate.h"
 
 struct WindowData {
     DWORD processID;

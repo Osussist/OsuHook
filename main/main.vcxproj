@@ -172,6 +172,7 @@
     <ClInclude Include="src\sdk\window\window.h" />
     <ClInclude Include="src\utils\crypto.h" />
     <ClInclude Include="src\utils\logger.h" />
+    <ClInclude Include="src\utils\translate.h" />
     <ClInclude Include="src\utils\watcher.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

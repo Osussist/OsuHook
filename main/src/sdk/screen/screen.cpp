@@ -2,13 +2,6 @@
 
 HWND Screen::windowHandle = nullptr;
 
-std::string WcharToChar(const wchar_t* wchar) {
-	int bufferSize = WideCharToMultiByte(CP_UTF8, 0, wchar, -1, nullptr, 0, nullptr, nullptr);
-	std::string charStr(bufferSize, 0);
-	WideCharToMultiByte(CP_UTF8, 0, wchar, -1, &charStr[0], bufferSize, nullptr, nullptr);
-	return charStr;
-}
-
 BOOL CALLBACK EnumWindowsProc(HWND hwnd, LPARAM lParam) {
 	WindowData* data = reinterpret_cast<WindowData*>(lParam);
 	DWORD windowPID = 0;
@@ -50,11 +43,11 @@ Vector2<T> Screen::get_host_size() {
 std::string Screen::get_client_title() {
 	wchar_t title[256];
 	GetWindowText(Screen::windowHandle, title, sizeof(title));
-	return WcharToChar(title);
+	return Translate::WcharToChar(title);
 }
 
 std::string Screen::get_current_window_title() {
 	wchar_t title[256];
 	GetWindowText(GetForegroundWindow(), title, sizeof(title));
-	return WcharToChar(title);
+	return Translate::WcharToChar(title);
 }
