@@ -9,6 +9,7 @@
 class SDK {
 public:
 	SDK(Logger logger);
+
 	static Screen screen;
 	static Storage storage;
 	static HANDLE processHandle;

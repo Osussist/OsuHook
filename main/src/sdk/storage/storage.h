@@ -7,10 +7,12 @@ class Storage {
 public:
     Storage() : logger(0, false) { return; }
     Storage(Logger sdkLogger, HANDLE processHandle);
+    
+	Parser::Beatmap get_beatmap(std::string beatmapChecksum);
 
     static std::string baseDirectory;
     static std::string songsDirectory;
-    static std::unique_ptr<Parser::Database> database;
+    static Parser::Database database;
 private:
     Logger logger;
 };
