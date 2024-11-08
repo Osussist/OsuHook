@@ -2,6 +2,7 @@
 #include "../../utils/logger.h"
 #include <osu!parser/Parser.hpp>
 #include <memory>
+#include <psapi.h>
 
 class Storage {
 public:
