@@ -3,6 +3,7 @@
 #include <osu!parser/Parser.hpp>
 #include "../../utils/translate.h"
 #include "../../utils/crypto.h"
+#include "../../utils/watcher.h"
 #include <memory>
 #include <psapi.h>
 #include <list>
@@ -14,7 +15,6 @@ public:
     
 	Parser::Beatmap get_beatmap(std::string beatmapChecksum);
 	void update_database();
-    void on_beatmap_import(std::wstring beatmapPath);
 
     static std::string baseDirectory;
     static std::string songsDirectory;
@@ -22,5 +22,5 @@ public:
 private:
     Logger logger;
     static std::list<std::pair<std::string, std::string>> cachedBeatmaps;
-
+    static void on_beatmap_import(const std::wstring& beatmapPath);
 };
