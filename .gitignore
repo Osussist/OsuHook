@@ -30,3 +30,5 @@
 *.exe
 *.out
 *.app
+/spoofer/x64/Debug
+/build
