@@ -4,7 +4,6 @@ std::string Storage::baseDirectory = "";
 std::string Storage::songsDirectory = "";
 Parser::Database Storage::database(Storage::baseDirectory);
 
-
 std::string GetHandlePath(HANDLE processHandle) {
 	char buffer[MAX_PATH];
 	GetModuleFileNameExA(processHandle, NULL, buffer, MAX_PATH);
@@ -20,19 +19,38 @@ Storage::Storage(Logger sdkLogger, HANDLE processHandle) : logger(sdkLogger) {
 	logger.debug(__FUNCTION__, "Songs directory: " + Storage::songsDirectory);
 	Parser::Database database(Storage::baseDirectory + "\\osu!.db");
 	logger.debug(__FUNCTION__, "Database initialized");
+	std::list<std::vector<std::string, Parser::Beatmap>> cachedBeatmaps = std::list<std::vector<std::string, Parser::Beatmap>>();
+	logger.debug(__FUNCTION__, "Cached beatmaps initialized");
 	logger.info(__FUNCTION__, "Storage initialized successfully");
 }
 
 Parser::Beatmap Storage::get_beatmap(std::string beatmapHash) {
+
+	if (cachedBeatmaps.size() > 0) {
+		for (const std::vector<std::string, Parser::Beatmap>& cachedBeatmap : cachedBeatmaps) {
+			if (cachedBeatmap[0] == beatmapHash) {
+				logger.debug(__FUNCTION__, "Beatmap with hash " + beatmapHash + " found in cache");
+				return cachedBeatmap[1];
+			}
+		}
+	}
+	logger.debug(__FUNCTION__, "Beatmap with hash " + beatmapHash + " not found in cache");
 	for (const Parser::BeatmapEntry& checkedBeatmap : database.Beatmaps)
 	{
 		for (const Parser::BeatmapEntry& checkedBeatmap : database.Beatmaps) {
 			if (checkedBeatmap.BeatmapHash == beatmapHash) {
 				Parser::Beatmap beatmap = Parser::Beatmap(checkedBeatmap.BeatmapPath);
+				logger.debug(__FUNCTION__, "Beatmap with hash " + beatmapHash + " found in database");
 				return beatmap;
 			}
 		}
-		logger.warning(__FUNCTION__, "Beatmap with hash " + beatmapHash + " not found in database");
-		return Parser::Beatmap(""); // TODO: Implement cached beatmaps
+		logger.debug(__FUNCTION__, "Beatmap with hash " + beatmapHash + " not found in database");
+		return Parser::Beatmap("");
 	}
+}
+
+void Storage::update_database() {
+    Storage::database.~Database();
+	Parser::Database database(Storage::baseDirectory + "\\osu!.db");
+    logger.info(__FUNCTION__, "Database updated");
 }
