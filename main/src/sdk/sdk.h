@@ -1,5 +1,6 @@
 #pragma once
 #include "../utils/logger.h"
+#include "../utils/procmon.h"
 #include "./screen/screen.h"
 #include "./storage/storage.h"
 #include <tlhelp32.h>
@@ -16,4 +17,5 @@ public:
 private:
 	Logger logger;
 	static DWORD processId;
+	ProcessMonitor processMonitor;
 };

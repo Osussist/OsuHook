@@ -56,6 +56,6 @@ void Storage::update_database() {
 
 void Storage::on_beatmap_import(const std::wstring& beatmapPath) {
     std::string convertedPath = Translate::WcharToChar(beatmapPath.c_str());
-	std::string beatmapHash = Translate::CharArrayToString(Crypto::get_md5_from_file(convertedPath));
+	std::string beatmapHash = Translate::CharArrayToString(Crypto::GetMD5FromFile(convertedPath));
 	Storage::cachedBeatmaps.push_back(std::make_pair(beatmapHash, convertedPath));
 }

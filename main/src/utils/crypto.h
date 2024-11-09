@@ -11,11 +11,11 @@ class Crypto {
 public:
     Crypto() = default;
 
-    static std::array<char, 16> get_md5(const std::string& input) {
+    static std::array<char, 16> GetMD5FromString(const std::string& input) {
         return md5(input.c_str());
     }
 
-    static std::array<char, 16> get_md5_from_file(const std::string& filename) {
+    static std::array<char, 16> GetMD5FromFile(const std::string& filename) {
         std::ifstream file(filename, std::ios::binary);
         if (!file) {
             return {};
@@ -23,7 +23,7 @@ public:
         std::ostringstream oss;
         oss << file.rdbuf();
         std::string content = oss.str();
-        return get_md5(content);
+        return GetMD5FromString(content);
     }
 
 private:
