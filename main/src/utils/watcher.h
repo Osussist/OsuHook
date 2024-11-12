@@ -8,8 +8,8 @@ class FileSystemWatcher {
 public:
     using Callback = std::function<void(const std::wstring&)>;
 
-    FileSystemWatcher(const std::wstring& directory, Callback callback)
-        : directory_(directory), callback_(callback), stop_flag_(false) {}
+    FileSystemWatcher(const std::wstring& directory, Callback callback, Logger givenLogger)
+        : directory_(directory), callback_(callback), stop_flag_(false), logger(givenLogger) {}
 
     ~FileSystemWatcher() {
         stop();
@@ -38,11 +38,12 @@ private:
             NULL);
 
         if (hDir == INVALID_HANDLE_VALUE) {
-            std::wcerr << L"Failed to open directory: " << directory_ << std::endl;
+			logger.error(__FUNCTION__, "Failed to open directory: " + std::to_string(GetLastError()));
             return;
         }
 
-        BYTE buffer[1024];
+        const DWORD bufferSize = 1024 * 10;
+        BYTE buffer[bufferSize];
         DWORD bytesReturned;
         while (!stop_flag_) {
             BOOL success = ReadDirectoryChangesW(
@@ -63,6 +64,7 @@ private:
                     std::wstring fileName(notify->FileName, notify->FileNameLength / sizeof(WCHAR));
 
                     if (notify->Action == FILE_ACTION_ADDED || notify->Action == FILE_ACTION_MODIFIED) {
+						logger.info(__FUNCTION__, "File added or modified: " + Translate::WcharToChar(fileName.c_str()));
                         callback_(directory_ + L"\\" + fileName);
                     }
 
@@ -74,6 +76,7 @@ private:
         CloseHandle(hDir);
     }
 
+    Logger logger;
     std::wstring directory_;
     Callback callback_;
     bool stop_flag_;

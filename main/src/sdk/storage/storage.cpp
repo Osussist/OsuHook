@@ -20,7 +20,8 @@ Storage::Storage(Logger sdkLogger, HANDLE processHandle) : logger(sdkLogger) {
 	logger.debug(__FUNCTION__, "Songs directory: " + Storage::songsDirectory);
 	Parser::Database database(Storage::baseDirectory + "\\osu!.db");
 	logger.debug(__FUNCTION__, "Database initialized");
-	FileSystemWatcher watcher(Translate::CharToWchar(Storage::songsDirectory.c_str()), on_beatmap_import);
+	FileSystemWatcher watcher(Translate::CharToWchar(Storage::songsDirectory.c_str()), on_beatmap_import, logger);
+	watcher.SetupWatcher();
 	logger.debug(__FUNCTION__, "Cached beatmaps initialized");
 	logger.info(__FUNCTION__, "Storage initialized successfully");
 }
