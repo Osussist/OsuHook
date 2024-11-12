@@ -1,9 +1,10 @@
 #pragma once
 #include "../../utils/logger.h"
+#include <FileWatcher.h>
 #include <osu!parser/Parser.hpp>
 #include "../../utils/translate.h"
 #include "../../utils/crypto.h"
-#include "../../utils/watcher.h"
+#include <unordered_map>
 #include <memory>
 #include <psapi.h>
 #include <list>
@@ -22,6 +23,5 @@ public:
 private:
     Logger logger;
 	static std::unordered_map<std::string, std::string> cachedBeatmaps;
-    static void on_beatmap_import(const std::wstring& beatmapPath);
-    static FileSystemWatcher watcher;
+    static void on_beatmap_import(const std::wstring& beatmapPath, Logger logger);
 };
