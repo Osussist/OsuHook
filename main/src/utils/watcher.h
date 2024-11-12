@@ -12,14 +12,14 @@ public:
         : directory_(directory), callback_(callback), stop_flag_(false), logger(givenLogger) {}
 
     ~FileSystemWatcher() {
-        stop();
+        StopWatcher();
     }
 
-    void SetupWatcher() {
+    void StartWatcher() {
         watcher_thread_ = std::thread(&FileSystemWatcher::watch, this);
     }
 
-    void stop() {
+    void StopWatcher() {
         stop_flag_ = true;
         if (watcher_thread_.joinable()) {
             watcher_thread_.join();
@@ -28,6 +28,7 @@ public:
 
 private:
     void watch() {
+		logger.debug(__FUNCTION__, "Attempting to open directory: " + Translate::WcharToChar(directory_.c_str()));
         HANDLE hDir = CreateFileW(
             directory_.c_str(),
             FILE_LIST_DIRECTORY,
@@ -42,6 +43,7 @@ private:
             return;
         }
 
+		logger.debug(__FUNCTION__, "Successfully opened directory: " + Translate::WcharToChar(directory_.c_str()));
         const DWORD bufferSize = 1024 * 10;
         BYTE buffer[bufferSize];
         DWORD bytesReturned;
