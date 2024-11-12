@@ -13,7 +13,7 @@ public:
     Storage() : logger(0, false) { return; }
     Storage(Logger sdkLogger, HANDLE processHandle);
     
-	Parser::Beatmap get_beatmap(std::string beatmapChecksum);
+	Parser::Beatmap get_beatmap(const std::string beatmapHash);
 	void update_database();
 
     static std::string baseDirectory;
@@ -21,6 +21,7 @@ public:
     static Parser::Database database;
 private:
     Logger logger;
-    static std::list<std::pair<std::string, std::string>> cachedBeatmaps;
+	static std::unordered_map<std::string, std::string> cachedBeatmaps;
     static void on_beatmap_import(const std::wstring& beatmapPath);
+    static FileSystemWatcher watcher;
 };

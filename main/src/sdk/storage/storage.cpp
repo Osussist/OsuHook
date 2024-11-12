@@ -3,7 +3,7 @@
 std::string Storage::baseDirectory = "";
 std::string Storage::songsDirectory = "";
 Parser::Database Storage::database(Storage::baseDirectory);
-std::list<std::pair<std::string, std::string>> Storage::cachedBeatmaps;
+std::unordered_map<std::string, std::string> Storage::cachedBeatmaps;
 
 std::string GetHandlePath(HANDLE processHandle) {
 	char buffer[MAX_PATH];
@@ -21,19 +21,16 @@ Storage::Storage(Logger sdkLogger, HANDLE processHandle) : logger(sdkLogger) {
 	Parser::Database database(Storage::baseDirectory + "\\osu!.db");
 	logger.debug(__FUNCTION__, "Database initialized");
 	FileSystemWatcher watcher(Translate::CharToWchar(Storage::songsDirectory.c_str()), on_beatmap_import, logger);
-	watcher.SetupWatcher();
+	watcher.StartWatcher();
 	logger.debug(__FUNCTION__, "Cached beatmaps initialized");
 	logger.info(__FUNCTION__, "Storage initialized successfully");
 }
 
-Parser::Beatmap Storage::get_beatmap(std::string beatmapHash) {
-	if (cachedBeatmaps.size() > 0) {
-        for (const auto& cachedBeatmap : cachedBeatmaps) {
-			if (cachedBeatmap.first == beatmapHash) {
-				logger.debug(__FUNCTION__, "Beatmap with hash " + beatmapHash + " found in cache");
-				return Parser::Beatmap(cachedBeatmap.second);
-			}
-        }
+Parser::Beatmap Storage::get_beatmap(const std::string beatmapHash) {
+	auto it = cachedBeatmaps.find(beatmapHash);
+	if (it != cachedBeatmaps.end()) {
+		logger.debug(__FUNCTION__, "Beatmap with hash " + beatmapHash + " found in cache");
+		return Parser::Beatmap(it->second);
 	}
 
 	logger.debug(__FUNCTION__, "Beatmap with hash " + beatmapHash + " not found in cache");
@@ -56,7 +53,9 @@ void Storage::update_database() {
 }
 
 void Storage::on_beatmap_import(const std::wstring& beatmapPath) {
-    std::string convertedPath = Translate::WcharToChar(beatmapPath.c_str());
+	if (beatmapPath.find(L".osu") == std::string::npos)
+		return;
+	std::string convertedPath = Translate::WcharToChar(beatmapPath.c_str());
 	std::string beatmapHash = Translate::CharArrayToString(Crypto::GetMD5FromFile(convertedPath));
-	Storage::cachedBeatmaps.push_back(std::make_pair(beatmapHash, convertedPath));
+	cachedBeatmaps[beatmapHash] = convertedPath;
 }

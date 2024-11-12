@@ -5,17 +5,12 @@
 #include <csignal>
 
 Logger* globalLogger = nullptr;
-std::atomic<bool> keepRunning(true);
 
 void CustomTerminateHandler() {
     if (globalLogger) {
         globalLogger->error(__FUNCTION__, "Unhandled exception occurred. Terminating program.");
     }
     std::abort();
-}
-
-void SignalHandler(int signal) {
-    keepRunning = false;
 }
 
 #ifdef _DEBUG
@@ -33,12 +28,9 @@ int main() {
     try {
         SDK sdk(logger);
 
-        std::signal(SIGINT, SignalHandler);
-        std::signal(SIGTERM, SignalHandler);
-
-        while (keepRunning) {
-            std::this_thread::sleep_for(std::chrono::milliseconds(100));
-        }
+		while (true) {
+			std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+		}
     }
     catch (const std::exception& e) {
         logger.error(__FUNCTION__, std::string("Exception caught: ") + e.what());
