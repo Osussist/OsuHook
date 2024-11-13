@@ -12,16 +12,6 @@ public:
         : directory_(directory), callback_(callback), stop_flag_(false), logger(givenLogger) {}
 
     ~FileSystemWatcher() {
-<<<<<<< HEAD
-        stop();
-    }
-
-    void SetupWatcher() {
-        watcher_thread_ = std::thread(&FileSystemWatcher::watch, this);
-    }
-
-    void stop() {
-=======
         StopWatcher();
     }
 
@@ -30,7 +20,6 @@ public:
     }
 
     void StopWatcher() {
->>>>>>> parent of 4ad6646 (Replace FileSystemWatcher with FileWatcher library)
         stop_flag_ = true;
         if (watcher_thread_.joinable()) {
             watcher_thread_.join();
@@ -39,10 +28,7 @@ public:
 
 private:
     void watch() {
-<<<<<<< HEAD
-=======
 		logger.debug(__FUNCTION__, "Attempting to open directory: " + Translate::WcharToChar(directory_.c_str()));
->>>>>>> parent of 4ad6646 (Replace FileSystemWatcher with FileWatcher library)
         HANDLE hDir = CreateFileW(
             directory_.c_str(),
             FILE_LIST_DIRECTORY,
@@ -57,10 +43,7 @@ private:
             return;
         }
 
-<<<<<<< HEAD
-=======
 		logger.debug(__FUNCTION__, "Successfully opened directory: " + Translate::WcharToChar(directory_.c_str()));
->>>>>>> parent of 4ad6646 (Replace FileSystemWatcher with FileWatcher library)
         const DWORD bufferSize = 1024 * 10;
         BYTE buffer[bufferSize];
         DWORD bytesReturned;
