@@ -54,7 +54,7 @@ void Storage::on_beatmap_import(const std::wstring& beatmapPath, Logger logger) 
 		return;
 
 	std::string convertedPath = Translate::WcharToChar(beatmapPath.c_str());
-	std::string beatmapHash = Translate::CharArrayToString(Crypto::GetMD5FromFile(convertedPath));
+	std::string beatmapHash = Crypto::GetMD5FromFile(convertedPath);
 	logger.info(__FUNCTION__, "Caching beatmap with hash " + beatmapHash);
 	cachedBeatmaps[beatmapHash] = convertedPath;
 }
