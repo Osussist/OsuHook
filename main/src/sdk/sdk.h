@@ -18,4 +18,5 @@ private:
 	Logger logger;
 	static DWORD processId;
 	ProcessMonitor processMonitor;
+	FileSystemWatcher watcher;
 };

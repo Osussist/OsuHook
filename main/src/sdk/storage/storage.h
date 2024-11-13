@@ -15,6 +15,7 @@ public:
     
 	Parser::Beatmap get_beatmap(const std::string beatmapHash);
 	void update_database();
+    static void on_beatmap_import(const std::wstring& beatmapPath, Logger logger);
 
     static std::string baseDirectory;
     static std::string songsDirectory;
@@ -22,6 +23,4 @@ public:
 private:
     Logger logger;
 	static std::unordered_map<std::string, std::string> cachedBeatmaps;
-    static void on_beatmap_import(const std::wstring& beatmapPath);
-    static FileSystemWatcher watcher;
 };

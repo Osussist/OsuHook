@@ -20,9 +20,6 @@ Storage::Storage(Logger sdkLogger, HANDLE processHandle) : logger(sdkLogger) {
 	logger.debug(__FUNCTION__, "Songs directory: " + Storage::songsDirectory);
 	Parser::Database database(Storage::baseDirectory + "\\osu!.db");
 	logger.debug(__FUNCTION__, "Database initialized");
-	FileSystemWatcher watcher(Translate::CharToWchar(Storage::songsDirectory.c_str()), on_beatmap_import, logger);
-	watcher.StartWatcher();
-	logger.debug(__FUNCTION__, "Cached beatmaps initialized");
 	logger.info(__FUNCTION__, "Storage initialized successfully");
 }
 
@@ -52,10 +49,12 @@ void Storage::update_database() {
     logger.info(__FUNCTION__, "Database updated");
 }
 
-void Storage::on_beatmap_import(const std::wstring& beatmapPath) {
+void Storage::on_beatmap_import(const std::wstring& beatmapPath, Logger logger) {
 	if (beatmapPath.find(L".osu") == std::string::npos)
 		return;
+
 	std::string convertedPath = Translate::WcharToChar(beatmapPath.c_str());
 	std::string beatmapHash = Translate::CharArrayToString(Crypto::GetMD5FromFile(convertedPath));
+	logger.info(__FUNCTION__, "Caching beatmap with hash " + beatmapHash);
 	cachedBeatmaps[beatmapHash] = convertedPath;
 }

@@ -30,7 +30,7 @@ DWORD GetProcessIdByName(const wchar_t* processName) {
     return processID;
 }
 
-SDK::SDK(Logger sdkLogger): logger(sdkLogger), processMonitor(nullptr) {
+SDK::SDK(Logger sdkLogger): logger(sdkLogger), processMonitor(nullptr), watcher(L"C:\\path\\to\\directory", SDK::storage.on_beatmap_import, logger) {
 	logger.info(__FUNCTION__, "Initializing SDK");
 	SDK::processId = GetProcessIdByName(L"osu!.exe");
     logger.debug(__FUNCTION__, "Found process ID: " + std::to_string(processId));
@@ -42,5 +42,7 @@ SDK::SDK(Logger sdkLogger): logger(sdkLogger), processMonitor(nullptr) {
 	logger.info(__FUNCTION__, "Initializing process monitor");
     SDK::processMonitor = ProcessMonitor(processHandle);
 	processMonitor.StartMonitoring();
+    SDK::watcher = FileSystemWatcher(Translate::CharToWchar(Storage::songsDirectory.c_str()), SDK::storage.on_beatmap_import, logger);
+    watcher.StartWatcher();
     logger.info(__FUNCTION__, "SDK initialized");
 }
