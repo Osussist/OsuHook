@@ -95,7 +95,7 @@
     <ClInclude Include="include\osu!parser\Parser.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\utils\watcher.h">
+    <ClInclude Include="include\FileWatcher.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\utils\crypto.h">
