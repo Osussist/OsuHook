@@ -23,7 +23,13 @@ HWND FindWindowFromProcess(HANDLE processHandle) {
 }
 
 Screen::Screen(Logger sdkLogger, HANDLE processHandle) : logger(sdkLogger) {
+	logger.debug(__FUNCTION__, "Initializing screen");
 	Screen::windowHandle = FindWindowFromProcess(processHandle);
+	while (Screen::windowHandle == nullptr) {
+		logger.error(__FUNCTION__, "Failed to find window handle, attempting again in a moment");
+		std::this_thread::sleep_for(std::chrono::milliseconds(4250));
+		Screen::windowHandle = FindWindowFromProcess(processHandle);
+	}
 	logger.debug(__FUNCTION__, "Found window handle: " + std::to_string(reinterpret_cast<int>(Screen::windowHandle)));
 	logger.info(__FUNCTION__, "Screen successfully initialized");
 }

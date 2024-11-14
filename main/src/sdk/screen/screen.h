@@ -2,6 +2,8 @@
 #include "../../utils/logger.h"
 #include "../objects/vector.h"
 #include "../../utils/translate.h"
+#include <thread>
+#include <chrono>
 
 struct WindowData {
     DWORD processID;

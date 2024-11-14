@@ -37,8 +37,8 @@ SDK::SDK(Logger sdkLogger): logger(sdkLogger), processMonitor(nullptr), watcher(
     SDK::processHandle = OpenProcess(PROCESS_ALL_ACCESS, FALSE, processId);
 	logger.debug(__FUNCTION__, "Found process handle: " + std::to_string(reinterpret_cast<int>(processHandle)));
 	logger.info(__FUNCTION__, "Initializing managers");
-    SDK::screen = Screen(logger, processHandle);
     SDK::storage = Storage(logger, processHandle);
+    SDK::screen = Screen(logger, processHandle);
 	logger.info(__FUNCTION__, "Initializing process monitor");
     SDK::processMonitor = ProcessMonitor(processHandle);
 	processMonitor.StartMonitoring();
