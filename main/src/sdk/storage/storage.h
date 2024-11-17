@@ -4,7 +4,6 @@
 #include "../../utils/translate.h"
 #include "../../utils/crypto.h"
 #include "../../utils/watcher.h"
-#include <memory>
 #include <psapi.h>
 #include <list>
 

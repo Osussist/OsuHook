@@ -144,6 +144,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\sdk\ipc\ipc.cpp" />
     <ClCompile Include="src\sdk\screen\screen.cpp" />
     <ClCompile Include="src\sdk\sdk.cpp" />
     <ClCompile Include="src\sdk\storage\storage.cpp" />
@@ -165,6 +166,7 @@
     <ClInclude Include="include\osu!parser\Parser\Structures\Database\Enums.hpp" />
     <ClInclude Include="include\osu!parser\Parser\Structures\Database\TimingPointEntry.hpp" />
     <ClInclude Include="include\osu!parser\Parser\Utilities.hpp" />
+    <ClInclude Include="src\sdk\ipc\ipc.h" />
     <ClInclude Include="src\sdk\screen\screen.h" />
     <ClInclude Include="src\sdk\objects\vector.h" />
     <ClInclude Include="src\sdk\sdk.h" />
