@@ -2,6 +2,7 @@
 #include <string>
 #include <windows.h>
 #include <array>
+#include <stdexcept>
 
 class Translate {
 public:

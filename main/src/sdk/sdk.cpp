@@ -1,5 +1,6 @@
 #include "sdk.h"
 
+IPC SDK::ipc = IPC();
 Screen SDK::screen = Screen();
 Storage SDK::storage = Storage();
 DWORD SDK::processId = 0;
@@ -38,6 +39,8 @@ SDK::SDK(Logger sdkLogger): logger(sdkLogger), processMonitor(nullptr), watcher(
 	logger.debug(__FUNCTION__, "Found process handle: " + std::to_string(reinterpret_cast<int>(processHandle)));
 	logger.info(__FUNCTION__, "Initializing managers");
     SDK::storage = Storage(logger, processHandle);
+	SDK::ipc = IPC(logger, processHandle);
+	std::cout << ipc.get_client_data().Buffering << std::endl;
     SDK::screen = Screen(logger, processHandle);
 	logger.info(__FUNCTION__, "Initializing process monitor");
     SDK::processMonitor = ProcessMonitor(processHandle);
