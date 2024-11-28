@@ -13,6 +13,9 @@ public:
 
 class Signatures {
 public:
-	inline static Signature AudioTime = Signature("DB 5C 24 34 8B 44 24 34", 0x2);
-	inline static Signature BeatmapChecksum = Signature("", 0x0); // I dont think its possible to get this signature
+	inline static Signature baseAddr = Signature("F8 01 74 04 83 65", 0x0);
+	inline static Signature audioTimeAddr = Signature("DB 5C 24 34 8B 44 24 34", 0x2);
 };
+
+// [baseAddr - 0xc] -> read_ptr = beatmapAddr
+// [beatmapAddr + 0x6c] -> read_int -> read_string = beatmapChecksum
