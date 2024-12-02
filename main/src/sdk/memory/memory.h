@@ -1,6 +1,8 @@
 #pragma once
 #include "../../utils/logger.h"
 #include "../objects/signatures.h"
+#include <psapi.h>
+#include <vector>
 
 class Memory {
 public:
