@@ -119,7 +119,7 @@
     <ClInclude Include="src\sdk\memory\memory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\sdk\memory\signatures.h">
+    <ClInclude Include="src\sdk\objects\signatures.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

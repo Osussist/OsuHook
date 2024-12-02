@@ -60,3 +60,5 @@ ClientData IPC::get_client_data() {
 
     return clientData;
 }
+
+// TODO: Fix later (this shit mad annoying)
