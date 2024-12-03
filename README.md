@@ -6,6 +6,7 @@ Little experimental cheat I started making for a client but he decided to go som
 - Legit Relax
 - Osu spoofer + cleaner
 - Enlighten overlay
+- Good SDK to use as base on other projects
 
 ## Contributing
 Im welcome to contributions! To contribute:
