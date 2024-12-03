@@ -6,3 +6,14 @@ Little experimental cheat I started making for a client but he decided to go som
 - Legit Relax
 - Osu spoofer + cleaner
 - Enlighten overlay
+
+## Contributing
+We welcome contributions to enhance Osussist! To contribute:
+
+1. Fork the repository.
+2. Create a new branch for your feature or bugfix (`git checkout -b feature/AmazingFeature`).
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`).
+4. Push to the branch (`git push origin feature/AmazingFeature`).
+5. Open a Pull Request.
+
+Make sure the program compiles correctly and runs correctly!
