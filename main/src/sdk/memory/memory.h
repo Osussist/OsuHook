@@ -9,6 +9,11 @@ public:
 	Memory() : logger(0, false) { return; }
 	Memory(Logger sdkLogger, HANDLE processHandle);
 
+	uintptr_t read_ptr(uintptr_t address);
+	int read_int(uintptr_t address);
+	double read_double(uintptr_t address);
+	std::string read_string(uintptr_t address, size_t length);
+
 	uintptr_t pattern_scan(Signature signature);
 
 	uintptr_t baseAddr;

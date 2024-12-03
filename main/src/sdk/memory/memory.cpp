@@ -1,5 +1,12 @@
 #include "memory.h"
 
+template <typename T>
+T ReadBytes(uintptr_t address, int bytes) {
+	std::vector<byte> buffer(bytes);
+	ReadProcessMemory(processHandle, (LPCVOID)address, buffer.data(), bytes, NULL);
+	return *reinterpret_cast<T*>(buffer.data());
+}
+
 Memory::Memory(Logger sdkLogger, HANDLE processHandle) : logger(sdkLogger), processHandle(processHandle) {
 	logger.info(__FUNCTION__, "Initializing Memory");
 	baseAddr = pattern_scan(baseSig);
@@ -7,6 +14,24 @@ Memory::Memory(Logger sdkLogger, HANDLE processHandle) : logger(sdkLogger), proc
 	audioTimeAddr = pattern_scan(audioTimeSig);
 	logger.debug(__FUNCTION__, "Found audio time address: " + std::to_string(audioTimeAddr));
 	logger.info(__FUNCTION__, "Memory initialized");
+}
+
+uintptr_t Memory::read_ptr(uintptr_t address) {
+	return ReadBytes<uintptr_t>(address, sizeof(uintptr_t));
+}
+
+int Memory::read_int(uintptr_t address) {
+	return ReadBytes<int>(address, sizeof(int));
+}
+
+double Memory::read_double(uintptr_t address) {
+	return ReadBytes<double>(address, sizeof(double));
+}
+
+std::string Memory::read_string(uintptr_t address, size_t length) {
+	std::vector<char> buffer(length);
+	ReadProcessMemory(processHandle, (LPCVOID)address, buffer.data(), length, NULL);
+	return std::string(buffer.data(), length);
 }
 
 uintptr_t Memory::pattern_scan(Signature signature) {

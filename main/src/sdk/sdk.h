@@ -3,6 +3,7 @@
 #include "../utils/procmon.h"
 #include "./screen/screen.h"
 #include "./storage/storage.h"
+#include "./memory/memory.h"
 #include "./ipc/ipc.h"
 #include <tlhelp32.h>
 
@@ -13,6 +14,7 @@ public:
 	static IPC ipc;
 	static Screen screen;
 	static Storage storage;
+	static Memory memory;
 	static HANDLE processHandle;
 private:
 	Logger logger;
