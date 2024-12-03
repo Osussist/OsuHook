@@ -49,7 +49,7 @@ ClientData IPC::get_client_data() {
         logger.error(__FUNCTION__, "Failed to get default AppDomain");
         return ClientData();
     }
-	//hr = pRuntimeHost->ExecuteInAppDomain(appDomainId);
+	//hr = pRuntimeHost->ExecuteInAppDomain(appDomainId); <- Full of shit
     if (FAILED(hr)) {
         logger.error(__FUNCTION__, "Failed to execute method");
         return ClientData();
