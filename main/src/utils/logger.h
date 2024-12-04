@@ -13,15 +13,15 @@
 
 class Logger {
 public:
-    Logger(const int logLevel, const bool logToFile);
+	Logger(const int logLevel, const bool logToFile);
 
-    void info(const std::string& function, const std::string& message);
-    void error(const std::string& function, const std::string& message);
-    void warning(const std::string& function, const std::string& message);
-    void debug(const std::string& function, const std::string& message);
-    void separator();
+	void info(const std::string& function, const std::string& message);
+	void error(const std::string& function, const std::string& message);
+	void warning(const std::string& function, const std::string& message);
+	void debug(const std::string& function, const std::string& message);
+	void separator();
 private:
 	static int logLevel;
-    static bool logToFile;
-    static std::ofstream logFile;
+	static bool logToFile;
+	static std::ofstream logFile;
 };

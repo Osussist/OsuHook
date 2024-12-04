@@ -3,10 +3,10 @@
 
 class Signature {
 public:
-    Signature(std::string givenPattern, int givenOffset = 0x0) : pattern(givenPattern), offset(givenOffset) { return; }
+	Signature(std::string givenPattern, int givenOffset = 0x0) : pattern(givenPattern), offset(givenOffset) { return; }
 
-    std::string pattern = "";
-    int offset = 0x0;
+	std::string pattern = "";
+	int offset = 0x0;
 };
 
 // Might be useful to add different types of signatures in the future, for now only focus on IDA style ones

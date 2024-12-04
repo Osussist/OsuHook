@@ -6,8 +6,8 @@
 #include <chrono>
 
 struct WindowData {
-    DWORD processID;
-    HWND windowHandle;
+	DWORD processID;
+	HWND windowHandle;
 };
 
 class Screen {

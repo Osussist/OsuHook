@@ -44,9 +44,9 @@ Parser::Beatmap Storage::get_beatmap(const std::string beatmapHash) {
 }
 
 void Storage::update_database() {
-    Storage::database.~Database();
+	Storage::database.~Database();
 	Parser::Database database(Storage::baseDirectory + "\\osu!.db");
-    logger.info(__FUNCTION__, "Database updated");
+	logger.info(__FUNCTION__, "Database updated");
 }
 
 void Storage::on_beatmap_import(const std::wstring& beatmapPath, Logger logger) {
