@@ -30,12 +30,6 @@
     <ClCompile Include="src\sdk\storage\storage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\sdk\ipc\ipc.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\sdk\memory\memory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\utils\logger.h">
@@ -111,12 +105,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\utils\watcher.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\sdk\ipc\ipc.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\sdk\memory\memory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\sdk\objects\signatures.h">

@@ -80,6 +80,12 @@
     <TargetName>osuhook</TargetName>
     <IntDir>$(SolutionDir)\build\main_intermediates\debug</IntDir>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <PublicIncludeDirectories>
+    </PublicIncludeDirectories>
+    <OutDir>$(SolutionDir)build\main</OutDir>
+    <IntDir>$(SolutionDir)build\main_intermediate</IntDir>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -119,6 +125,9 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -144,8 +153,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\sdk\ipc\ipc.cpp" />
-    <ClCompile Include="src\sdk\memory\memory.cpp" />
     <ClCompile Include="src\sdk\screen\screen.cpp" />
     <ClCompile Include="src\sdk\sdk.cpp" />
     <ClCompile Include="src\sdk\storage\storage.cpp" />
@@ -167,8 +174,6 @@
     <ClInclude Include="include\osu!parser\Parser\Structures\Database\Enums.hpp" />
     <ClInclude Include="include\osu!parser\Parser\Structures\Database\TimingPointEntry.hpp" />
     <ClInclude Include="include\osu!parser\Parser\Utilities.hpp" />
-    <ClInclude Include="src\sdk\ipc\ipc.h" />
-    <ClInclude Include="src\sdk\memory\memory.h" />
     <ClInclude Include="src\sdk\objects\signatures.h" />
     <ClInclude Include="src\sdk\screen\screen.h" />
     <ClInclude Include="src\sdk\objects\vector.h" />
